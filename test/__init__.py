@@ -1,0 +1,1 @@
+all = ["test_diamonds_widi_06"]
