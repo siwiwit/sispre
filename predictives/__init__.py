@@ -1,0 +1,1 @@
+all = ["diamonds_widi","test_diamonds_widi"]
