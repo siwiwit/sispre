@@ -1,5 +1,6 @@
 {
-    "editor.wordWrapColumn": 400,
+    "editor.wordWrapColumn": 500,
     "html.format.wrapLineLength": 0,
-    "editor.wrappingIndent": "none"
+    "debug.console.wordWrap": false,
+    "yaml.format.printWidth": 200
 }
