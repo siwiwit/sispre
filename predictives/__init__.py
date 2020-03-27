@@ -1,1 +1,1 @@
-all = ["diamonds_widi","test_diamonds_widi"]
+import predictive_processor

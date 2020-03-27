@@ -276,9 +276,9 @@ def main():
         if(df.dtypes[column]!='int64' or df.dtypes[column]!='int32'):
                 logger.info("LL: no int64 or int32")
                 categorical_features_nonint.append(column)
-                # df_example = df[column].fillna(0)
-            else:
-                logger.info("LL: yes int64 or int32")
+            # df_example = df[column].fillna(0)
+        else:
+            logger.info("LL: yes int64 or int32")
     
     from sklearn.preprocessing import OrdinalEncoder
     enc_ordinal = OrdinalEncoder()
@@ -344,7 +344,7 @@ def main():
     logger.info("LL: selected_cols \n%s", selected_cols)
     # filter in the selected features
     df_sel = df[selected_cols.index]
-    logger.info("LL: df_sel.head() \n%s," def_sel.head())
+    logger.info("LL: df_sel.head() \n%s", def_sel.head())
 
     # Wrapper Methods
     #  Sequential Feature Selection
@@ -365,7 +365,7 @@ def main():
     rfe.fit(X, y)
     
     logger.info("LL: cols \n%s", cols)
-    logger.info("LL: rfe.ranking_)
+    logger.info("LL: rfe.ranking_")
 
     logger.info("LL: -----------------------------------------------")
 

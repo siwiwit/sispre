@@ -3,3 +3,4 @@ predictives/.ipynb_checkpoints/credit_card_widi-checkpoint.ipynb
 .vscode/.ropeproject/config.py
 .vscode/.ropeproject/objectdb
 .vscode/settings.json
+predictives/__pycache__/predictive_processor.cpython-37.pyc
