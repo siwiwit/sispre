@@ -1,18 +1,26 @@
 # %%
 from IPython import get_ipython
 import predictive_processor
+import logging
 
 import os
+
+
 def is_running_from_ipython():
     from IPython import get_ipython
     return get_ipython() is not None
 
 
-
+logger = logging.getLogger()
+# sth = logging.StreamHandler()
+logger.setLevel(logging.INFO)
+# sth.setFormatter(logging.Formatter(fmt='%(name) %(asctime)s %(levelname)s %(message)s', datefmt='%H:%M:%S'))
+# logger.addHandler(sth)
 # Area for experimentals variables
 
 data_dir = 'data'
 file_name = 'credit_card_default.csv'
+
 
 class CreditCardColumnsInformation:
     id = 'ID'
@@ -41,7 +49,7 @@ class CreditCardColumnsInformation:
     pay_amt6 = 'PAY_AMT6'
     default_payment_next_month = 'default payment next month'
 
-# %%
+
 file_url = ''
 if not is_running_from_ipython():
     abspath = os.path.abspath('.')
@@ -51,12 +59,11 @@ else:
 # logging.debug('abspath %s', abspath)
 
 
-
 def main():
     # get_ipython().run_line_magic('matplotlib', 'inline')
     data_dir = 'data'
     file_name = 'credit_card_default.csv'
-    #column_names = ID,LIMIT_BAL,SEX,EDUCATION,MARRIAGE,AGE,PAY_1,PAY_2,PAY_3,PAY_4,PAY_5,PAY_6,BILL_AMT1,BILL_AMT2,BILL_AMT3,BILL_AMT4,BILL_AMT5,BILL_AMT6,PAY_AMT1,PAY_AMT2,PAY_AMT3,PAY_AMT4,PAY_AMT5,PAY_AMT6,default payment next month
+    # column_names = ID,LIMIT_BAL,SEX,EDUCATION,MARRIAGE,AGE,PAY_1,PAY_2,PAY_3,PAY_4,PAY_5,PAY_6,BILL_AMT1,BILL_AMT2,BILL_AMT3,BILL_AMT4,BILL_AMT5,BILL_AMT6,PAY_AMT1,PAY_AMT2,PAY_AMT3,PAY_AMT4,PAY_AMT5,PAY_AMT6,default payment next month
     numerical_features = []
     categorical_features = []
     categorical_features_nonint = []
@@ -70,33 +77,41 @@ def main():
     else:
         file_url = os.path.join('../', data_dir, file_name)
     # logging.debug('abspath %s', abspath)
-    import predictive_processor
+    # import predictive_processor
 
     pp = predictive_processor.PredictiveProcessor()
+    # pp = PredictiveProcessor()
     pp.file_url = file_url
-    df = pp.data_read_csv()
-    pp.df = df
+    
     colinf = CreditCardColumnsInformation
     pp.target_col_name = colinf.default_payment_next_month
     pp.idx_col_name = colinf.id
     pp.file_url = file_url
     pp.data_read_csv()
+    pp.datainfo_matrix_basic()
+    pp.datainfo_basic_configindex()
+    logger.info('matrix stat min \n -----------')
+    logger.info(pp.datainfo_matrix_stats().get('min'))
+    from typing import Mapping, Sequence
 
-    # pp.datainfo()
-    pp.datainfo_matrix_features()
-    pp.datainfo_basic_getindex()
-    # pp.datainfo()
-    # pp.data_preparation()
-    # pp.data_analysis_exploratory()
-    # pp.data_model_building()
-    # pp.model_evaluation()
-    # pp.model_deployment()
+    colvaldict = {}
+    colvaldict[1]='highscool'
+    colvaldict[2]='junior highscool'
+    logger.info("datainfo_matrix_valuecounts \n %s", pp.datainfo_matrix_valuecounts([colinf.education]))
+    newdf = pp.datainfo_basic_setlabel_category_vals([colinf.education],colvaldict)
+    # logger.info("newdf head \n %s",newdf.head())
+    
+    logger.info("newdf describe \n %s",newdf.describe().transpose())
+    logger.info("matrix stat head \n %s", pp.datainfo_matrix_stats()['head'])
+    # pp.datainfo_plot_sns_scatter(colinf.age,colinf.bill_amt1,colinf.education)
+    # logger.info("LL: df.sort_values(columns[1]).head(10)\n%s", pp.dataframe.sort_values(pp.dataframe.columns[1]).head(10))
+
+    
+
 
 if __name__ == "__main__":
     main()
     # pass
-
-
 
 
 # %%
