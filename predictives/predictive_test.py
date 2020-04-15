@@ -82,36 +82,105 @@ def main():
     pp = predictive_processor.PredictiveProcessor()
     # pp = PredictiveProcessor()
     pp.file_url = file_url
-    
+
+	# logger.info('matrix stat min \n -----------')
+    # logger.info(pp.datainfo_matrix_stats().get('min'))
+    from typing import Mapping, Sequence
+
+    # colvaldict = {}
+    # colvaldict[1]='highscool'
+    # colvaldict[2]='junior highscool'
+
     colinf = CreditCardColumnsInformation
     pp.target_col_name = colinf.default_payment_next_month
     pp.idx_col_name = colinf.id
     pp.file_url = file_url
     pp.data_read_csv()
-    pp.datainfo_matrix_basic()
-    pp.datainfo_basic_configindex()
-    logger.info('matrix stat min \n -----------')
-    logger.info(pp.datainfo_matrix_stats().get('min'))
-    from typing import Mapping, Sequence
+	info = pp.datapred_validat_cross()
+    info = pp.datainfo_matrix_basic()
+    info = pp.datainfo_basic_configindex()
+	info = pp.datainfo_basic_setlabel_category_vals()
+	info = pp.datainfo_matrix_uniq_per_cat_columns()
+	info = pp.datainfo_matrix_valuecounts()
+	info = pp.datainfo_matrix_stats()
+	info = pp.datainfo_matrix_detect_feature_simple()
+	info = pp.datainfo_plot_sns_base()
+	info = pp.datainfo_plot_sns_scatter()
+	info = pp.datainfo_plot_sns_histdist()
+	info = pp.datainfo_plot_sns_join()
+	info = pp.datainfo_plot_sns_violin()
+	info = pp.datainfo_plot_sns_pair()
 
-    colvaldict = {}
-    colvaldict[1]='highscool'
-    colvaldict[2]='junior highscool'
-    logger.info("datainfo_matrix_valuecounts \n %s", pp.datainfo_matrix_valuecounts([colinf.education]))
-    newdf = pp.datainfo_basic_setlabel_category_vals([colinf.education],colvaldict)
+	info = pp.dataprep_check_features()
+	info = pp.dataprep_find_misval()
+	info = pp.dataprep_imputation()
+
+	info = pp.dataprep_scaling_normaliz()
+	info = pp.dataprep_scaling_standard()
+
+	info = pp.dataprep_encd_ordinal()
+	info = pp.dataprep_encd_onehot()
+	info = pp.dataprep_encd_label()
+
+	info = pp.dataprep_dimreduct_var_treshold()
+	info = pp.dataprep_dimenreduct_corel_coef()
+	info = pp.dataprep_featselect_sequential()
+
+	info = pp.dataprep_transform_pca()
+	info = pp.dataprep_transform_lda()
+
+	info = pp.datagroup_clust_kmeans()
+	info = pp.datagroup_clust_kmeansfinding()
+	info = pp.datagroup_clust_kmeansplus()
+
+	info = pp.datagroup_clust_kmeansminibatch()
+	info = pp.datagroup_clust_hierarc_dendogram()
+	info = pp.datagroup_clust_hierarc_dendogram_plot()
+
+	info = pp.datagroup_clust_density()
+	info = pp.datagroup_clust_spectral()
+
+	info = pp.datapred_getdata_traintest()
+
+	info = pp.datapred_regression_linear()
+	info = pp.datapred_regression_lasso()
+	info = pp.datapred_regression_ridge()
+
+	info = pp.datapred_regression_logistic()
+
+	info = pp.datapred_regression_logistic_confmatrix()
+	info = pp.datapred_regression_logistic_regular()
+
+	info = pp.datapred_classif_svm()
+	info = pp.datapred_classif_svm_gaussian_kernel()
+	info = pp.datapred_classif_decisiontree()
+
+	info = pp.datapred_classif_randomforest()
+	info = pp.datapred_classif_randomforest_bagging()
+
+	info = pp.datapred_validat_cross()
+	info = pp.datapred_validat_cross_kfold()
+	info = pp.datapred_validat_cross_kfold_gridsearch()
+
+	info = pp.datapipeln_loadxy()
+	info = pp.datapipeln_scikitlearn()
+	info = pp.datapipeln_storemodel_pickle()
+
+    logger.info("info keys",info.keys())
+
+    # logger.info("datainfo_matrix_valuecounts \n %s", pp.datainfo_matrix_valuecounts([colinf.education]))
+    # newdf = pp.datainfo_basic_setlabel_category_vals([colinf.education],colvaldict)
     # logger.info("newdf head \n %s",newdf.head())
-    
-    logger.info("newdf describe \n %s",newdf.describe().transpose())
-    logger.info("matrix stat head \n %s", pp.datainfo_matrix_stats()['head'])
+
+    # logger.info("newdf describe \n %s",newdf.describe().transpose())
+    # logger.info("matrix stat head \n %s", pp.datainfo_matrix_stats()['head'])
     # pp.datainfo_plot_sns_scatter(colinf.age,colinf.bill_amt1,colinf.education)
     # logger.info("LL: df.sort_values(columns[1]).head(10)\n%s", pp.dataframe.sort_values(pp.dataframe.columns[1]).head(10))
 
-    
+    # info = pp.datapipeln_scikitlearn()
 
 
 if __name__ == "__main__":
     main()
     # pass
-
-
 # %%

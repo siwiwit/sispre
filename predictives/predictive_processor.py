@@ -55,11 +55,11 @@ from sklearn.cluster import DBSCAN
 from sklearn.cluster import SpectralClustering
 
 
-from sklearn.datasets import load_boston
-from sklearn.datasets import make_blobs
-from sklearn.datasets import make_moons
-from sklearn.datasets import make_moons
-from sklearn.datasets import load_iris
+# from sklearn.datasets import load_boston
+# from sklearn.datasets import make_blobs
+# from sklearn.datasets import make_moons
+# from sklearn.datasets import make_moons
+# from sklearn.datasets import load_iris
 
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
@@ -153,7 +153,7 @@ class PredictiveProcessor:
     y_train = DataFrame
     y_test = DataFrame
     #column_names = ID,LIMIT_BAL,SEX,EDUCATION,MARRIAGE,AGE,PAY_1,PAY_2,PAY_3,PAY_4,PAY_5,PAY_6,BILL_AMT1,BILL_AMT2,BILL_AMT3,BILL_AMT4,BILL_AMT5,BILL_AMT6,PAY_AMT1,PAY_AMT2,PAY_AMT3,PAY_AMT4,PAY_AMT5,PAY_AMT6,default payment next month
-    
+
     column_names = []
     numerical_features = []
     categorical_features = []
@@ -162,7 +162,7 @@ class PredictiveProcessor:
     target_col_name = ''
     # numerical_features =['ID', 'LIMIT_BAL', 'AGE', 'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6', 'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6']
     # categorical_features =['SEX', 'EDUCATION', 'MARRIAGE', 'PAY_1', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'default payment next month']
-    
+
     # bill_amt_features = ['bill_amt'+ str(i) for i in range(1,7)]
     # pay_amt_features = ['pay_amt'+ str(i) for i in range(1,7)]
     # numerical_features = ['limit_bal','age'] + self.bill_amt_features + self.pay_amt_features
@@ -173,25 +173,25 @@ class PredictiveProcessor:
         logger.info("LL: -------------")
 
 
-##  Chapter 3: Collecting, Exploring, and Visualizing Data
-##     Types of data sources and loading into pandas
-##        Databases
-##            Basic Structured Query Language (SQL) queries
-##        Disks
-##        Web sources
-##            From URLs
-##            From Scikit-learn and Seaborn-included sets
+	##  Chapter 3: Collecting, Exploring, and Visualizing Data
+	##     Types of data sources and loading into pandas
+	##        Databases
+	##            Basic Structured Query Language (SQL) queries
+	##        Disks
+	##        Web sources
+	##            From URLs
+	##            From Scikit-learn and Seaborn-included sets
 
-    def data_read_csv(self, *args, **kwargs) :
-        logger.info("LL: -------------------------------")
-        logger.info("LL: data_read_csv")
-        logging.debug(' fileurl : \n %s  ', self.file_url)
-        self.dataframe = pd.read_csv(self.file_url)        
-        logger.info("LL: -------------------------------")
-        self.datainfo_matrix_detect_feature_simple(sizeofunique=11)
-        # return df
+		def data_read_csv(self, *args, **kwargs) :
+			logger.info("LL: -------------------------------")
+			logger.info("LL: data_read_csv")
+			logging.debug(' fileurl : \n %s  ', self.file_url)
+			self.dataframe = pd.read_csv(self.file_url)        
+			logger.info("LL: -------------------------------")
+			self.datainfo_matrix_detect_feature_simple(sizeofunique=11)
+			# return df
 
-##      Access, search, and sanity checks with pandas
+	##      Access, search, and sanity checks with pandas
     def datainfo_all(self, *args, **kwargs):
         logger.info("LL: -----------------------------------------------")
         logger.info("LL: datainfo start")
@@ -208,7 +208,7 @@ class PredictiveProcessor:
         self.datainfo_plot_sns_pair()
         logger.info("LL: datainfo end")
         logger.info("LL: -----------------------------------------------")
-        
+
     def datainfo_matrix_basic(self, *args, **kwargs):
         df = self.dataframe        
         info = {}
@@ -225,6 +225,7 @@ class PredictiveProcessor:
         info['index'] = df.index
         # logger.info("LL: df.dtypes \n%s", df.dtypes)        
         return info
+
     def datainfo_basic_configindex(self, *args, **kwargs):
         logger.info("LL: datainfo_df_index start")
         df = self.dataframe
@@ -249,7 +250,7 @@ class PredictiveProcessor:
             logger.info("LL: datainfo_basic_setlabel_category_vals \n %s %s ",valdict, catvaldict[valdict])
             df[catvaldict[valdict]] = (df[colname] == valdict).astype('int')
         return df
-    
+
     def datainfo_matrix_uniq_per_cat_columns(self, categorical_columns = [], *args, **kwargs):
         info = {}
         df = self.dataframe
@@ -263,7 +264,6 @@ class PredictiveProcessor:
             uniqcolvals = df[catcols].unique()
             info('catcols',uniqcolvals)
         return info
-
 
     def datainfo_matrix_valuecounts(self, columns = [], *args, **kwargs):
         df = self.dataframe
@@ -332,13 +332,13 @@ class PredictiveProcessor:
         info['categorical_features_nonint'] = categorical_features_nonint
         return info
 
-##      Basic plotting in Seaborn
+	##      Basic plotting in Seaborn
     def datainfo_plot_sns_base(self, *args, **kwargs):
         df = self.dataframe
         sns.set()
 
-##      Popular types of plots for visualizing data
-##           Scatter plots
+	##      Popular types of plots for visualizing data
+	##           Scatter plots
     def datainfo_plot_sns_scatter(self,xcol,ycol,huecol, *args, **kwargs):
         df = self.dataframe
         self.datainfo_plot_sns_base()
@@ -346,36 +346,32 @@ class PredictiveProcessor:
         # sns.scatterplot(x='AGE', y='BILL_AMT2', data=df,hue='EDUCATION',fit_reg=False, palette='bright',markers=['o','x','v','+'])
         sns.scatterplot(x=xcol, y=ycol, data=df, hue=huecol,palette='bright',markers=['o','x','v','+'])
 
-##           Histograms
+	##           Histograms
     def datainfo_plot_sns_histdist(self, cols=[],bins=15, *args, **kwargs):
         df = self.dataframe
         sns.distplot(df[cols], bins=bins)
 
-##           Jointplots
+	##           Jointplots
     def datainfo_plot_sns_join(self, xcol,ycol, bins, kind='scatter', *args, **kwargs):
         df = self.dataframe
         sns.jointplot(x=xcol, y=xcol, data=df, kind=kind, marginal_kws=dict(bins=bins))
         if kind=='kde':
             sns.jointplot(x=xcol, y=xcol, data=df, kind='kde', marginal_kws=dict(bins=bins))
 
-##           Violin plots
+	##           Violin plots
     def datainfo_plot_sns_violin(self, xcol,ycol, *args, **kwargs):
         df = self.dataframe
         sns.violinplot(x=xcol, y=xcol,  data=df)
         # sns.violinplot(x='Default',y='BILL_AMT2', data=df)
 
-##           Pairplots
+	##           Pairplots
     def datainfo_plot_sns_pair(self, vars_to_plot = ['CRIM', 'AGE', 'DIS', 'LSTAT', 'MEDV'], *args, **kwargs):
         df = self.dataframe
         # sns.pairplot(data=df)
         # vars_to_plot = ['CRIM', 'AGE', 'DIS', 'LSTAT', 'MEDV']
         sns.pairplot(data=df, vars=vars_to_plot)
 
-##      Summary
-
-
-
-    
+	##      Summary
     ##  Chapter 4: Cleaning and Readying Data for Analysis
     ##      The scikit-learn transformer API
     ##      Cleaning input data
@@ -419,7 +415,7 @@ class PredictiveProcessor:
 
     #-------------Check Correlation and Covariance
 
-    
+
     def dataprep_check_stats(self, *args,  ** kwargs):
         df = self.dataframe
         logger.info("LL: df.shape \n%s", df.shape)    
@@ -483,7 +479,7 @@ class PredictiveProcessor:
         info['df_rmv_cols_na']=  df_rmv_cols_na.shape
         return info
     # dataprep_find_misval(pp)
-    
+
     #alternatively use missingno
     #-----------missingno
 
@@ -524,7 +520,7 @@ class PredictiveProcessor:
 
     ##           Feature scaling
     ##               Normalization
-    
+
     def dataprep_scaling_normaliz(self,cols_to_minmaxscale = [], *args,  ** kwargs):
         df = self.dataframe
         info = {}
@@ -552,7 +548,7 @@ class PredictiveProcessor:
         return info
     # dataprep_scaling_normaliz(pp)
     ##               Standardization
-    
+
     #--------------change this
 
     def dataprep_scaling_standard(self, cols_to_standardscale=[],*args,  ** kwargs):
@@ -772,7 +768,7 @@ class PredictiveProcessor:
     def dataprep_transform_pca(self,dimencols=[],targetcols=[], vn_components=2, pca_columns = ['pca1', 'pca2'], fit_reg=False, *args,  ** kwargs):
         df = self.dataframe
         info = {}
-        
+
         if len(targetcols)==0:
             targetcols.append(self.target_col_name)
         if len(dimenscol)==0:
@@ -782,7 +778,7 @@ class PredictiveProcessor:
         # fit and transform using 2 input dimensions
         # out_pca = pca.fit_transform(df[['petal length in cm','petal width in cm',]])
         out_pca = pca.fit_transform(df[dimenscol])
-# 
+
         #  create pca output dataframe and add label column "species"
         df_pca = pd.DataFrame(data = out_pca, columns = pca_columns)
         df_pca = pd.concat([df_pca, df[targetcols]], axis = 1)
@@ -854,19 +850,18 @@ class PredictiveProcessor:
     # import datasets module from Sci-kit learn
 
     # function to create data for clustering examples
-    def get_blobs():
-        # build blobs for demonstration
-        n_samples = 1500
-        blobs = make_blobs(n_samples=n_samples,centers=5,cluster_std=[3.0, 0.9, 1.9, 1.9, 1.3],random_state=51)
-        
-        # create a Pandas dataframe for the data
-        df = pd.DataFrame(blobs[0], columns=['Feature_1', 'Feature_2'])
-        df.index.name = 'record'
-        print(df.head())
-        sns.lmplot(x='Feature_2', y='Feature_1', data=df, fit_reg=False)
+    # def get_blobs():
+    #     # build blobs for demonstration
+    #     n_samples = 1500
+    #     blobs = make_blobs(n_samples=n_samples,centers=5,cluster_std=[3.0, 0.9, 1.9, 1.9, 1.3],random_state=51)
 
-        return df
-    
+    #     # create a Pandas dataframe for the data
+    #     df = pd.DataFrame(blobs[0], columns=['Feature_1', 'Feature_2'])
+    #     df.index.name = 'record'
+    #     print(df.head())
+    #     sns.lmplot(x='Feature_2', y='Feature_1', data=df, fit_reg=False)
+
+    #     return df
 
     # plot scatter of blob set
 
@@ -1142,7 +1137,7 @@ class PredictiveProcessor:
     ### Ridge Regression ###
     # import modules
 
-    def datapred_regresion_ridge(self,alpha=0.3, *args,  ** kwargs):
+    def datapred_regression_ridge(self,alpha=0.3, *args,  ** kwargs):
         df = self.dataframe
         # import modules
         info = {}
@@ -1167,19 +1162,19 @@ class PredictiveProcessor:
         # print('r2 score is = ' + str(r2))
         logger.info('r2 score ridge reg is = %s',r2)
         return info
-    
+
     # datapred_regresion_ridge()
 
     ##      Classification
     ##           Classification example dataset
 
     # function to get toy moon dataset with training and test sets
-    def get_moon_data(self, *args,  ** kwargs):
-        df = self.dataframe
-        # make blobs and split into train and test sets
-        X, y = make_moons(n_samples=150, noise=0.4, random_state=42)
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.33, random_state=42)
-        return [X_train, X_test, y_train, y_test]
+    # def get_moon_data(self, *args,  ** kwargs):
+    #     df = self.dataframe
+    #     # make blobs and split into train and test sets
+    #     X, y = make_moons(n_samples=150, noise=0.4, random_state=42)
+    #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.33, random_state=42)
+    #     return [X_train, X_test, y_train, y_test]
 
     # %% [markdown]
     ##           Metrics of classification model prediction
@@ -1314,7 +1309,7 @@ class PredictiveProcessor:
         info['y_pred']=y_pred
         # return y_pred, y_test
         return info
-        
+
 
     # X_train, y_train, X_test, y_test = datapred_classif_svm()
 
@@ -1536,7 +1531,6 @@ class PredictiveProcessor:
         info['y_pred']=y_pred
         return info
         ##      Summary
-        
 
     # datapred_validat_cross_kfold_gridsearch()
 
@@ -1553,7 +1547,7 @@ class PredictiveProcessor:
 
     # X, y = datapipeln_loadxy()
 
-    # import modules 
+    # import modules
 
     def datapipeln_scikitlearn(self, *args,  ** kwargs):
         df = self.dataframe
@@ -1599,7 +1593,7 @@ class PredictiveProcessor:
     # model = datapipeln_scikitlearn()
 
     # use the resulting pipeline to predict on new data
-    
+
     ##      Deploying the model
     ##           Serializing a model and storing with the pickle module
     ### Store Model for Later with Pickle ###
@@ -1631,39 +1625,39 @@ class PredictiveProcessor:
     ##      Summary
     ##  Other Books You May Enjoy
 
-    def data_preparation(self, *args, **kwargs):
-        logger.info("LL: -------------------------------------")
-        logger.info("LL: data_preparation start")
-        logger.info("LL: data_preparation end")
-        logger.info("LL: -------------------------------------")
+    # def data_preparation(self, *args, **kwargs):
+    #     logger.info("LL: -------------------------------------")
+    #     logger.info("LL: data_preparation start")
+    #     logger.info("LL: data_preparation end")
+    #     logger.info("LL: -------------------------------------")
 
-    def data_preparation_encode_categorical_nonint(self, *args, **kwargs):
-        logger.info("LL: -------------------------------------------")
-        logger.info("LL: data_preparation_encode_categorical_nonint start")
-        logger.info("LL: data_preparation_encode_categorical_nonint end")
-        logger.info("LL: -------------------------------------------")
+    # def data_preparation_encode_categorical_nonint(self, *args, **kwargs):
+    #     logger.info("LL: -------------------------------------------")
+    #     logger.info("LL: data_preparation_encode_categorical_nonint start")
+    #     logger.info("LL: data_preparation_encode_categorical_nonint end")
+    #     logger.info("LL: -------------------------------------------")
 
-    def data_analysis_exploratory(self, *args, **kwargs):
-        logger.info("LL: ----------------------------------")
-        logger.info("LL: data_analysis_exploratory start")
-        logger.info("LL: data_analysis_exploratory end")
-        logger.info("LL: ----------------------------------")
+    # def data_analysis_exploratory(self, *args, **kwargs):
+    #     logger.info("LL: ----------------------------------")
+    #     logger.info("LL: data_analysis_exploratory start")
+    #     logger.info("LL: data_analysis_exploratory end")
+    #     logger.info("LL: ----------------------------------")
 
-    def data_model_building(self, *args, **kwargs):
-        logger.info("LL: -------------------------------------------")
-        logger.info("LL: data_model_building start")
-        logger.info("LL: data_model_building end")
-        logger.info("LL: -------------------------------------------")
+    # def data_model_building(self, *args, **kwargs):
+    #     logger.info("LL: -------------------------------------------")
+    #     logger.info("LL: data_model_building start")
+    #     logger.info("LL: data_model_building end")
+    #     logger.info("LL: -------------------------------------------")
 
-    def model_evaluation(self, *args, **kwargs):
-        logger.info("LL: -------------------------------------")
-        logger.info("LL: model_evaluation start")
-        logger.info("LL: model_evaluation end")
-        logger.info("LL: -------------------------------------")
+    # def model_evaluation(self, *args, **kwargs):
+    #     logger.info("LL: -------------------------------------")
+    #     logger.info("LL: model_evaluation start")
+    #     logger.info("LL: model_evaluation end")
+    #     logger.info("LL: -------------------------------------")
 
-    def model_deployment(self, *args, **kwargs):
-        logger.info("LL: -------------------------------------")
-        logger.info("LL: model_deployment start")
-        logger.info("LL: model_deployment end")
-        logger.info("LL: -------------------------------------")
+    # def model_deployment(self, *args, **kwargs):
+    #     logger.info("LL: -------------------------------------")
+    #     logger.info("LL: model_deployment start")
+    #     logger.info("LL: model_deployment end")
+    #     logger.info("LL: -------------------------------------")
 
