@@ -283,9 +283,13 @@ class PredictiveProcessor:
 		# logger.info("LL: df.median \n%s", df.median())
 		# idz = df.index
 		# logger.info("LL: df.index \n%s", df.index)
-		info['idxmin'] = df.idxmin()
+		## TODO Perbaiki IDXMin dengan memperhatikan dtype
+		# info['idxmin'] = df.idxmin()
+		df.idxmin()
 		# logger.info("LL: df.idxmin() \n%s", df.idxmin())
-		info['idxmax'] = df.idxmax()
+		## TODO Perbaiki IDXMax dengan memperhatikan dtype
+		# info['idxmax'] = df.idxmax()
+		df.idxmax()
 		# logger.info("LL: df.idxmax() \n%s", df.idxmax())
 		return info
 
@@ -650,9 +654,6 @@ class PredictiveProcessor:
 	def dataprep_encd_label(self, cols_to_transform=[], *args,  ** kwargs):
 		df = self.dataframe
 		info = {}
-		# --------- change this--
-		# out_enc_label = enc_label.fit_transform(categorical_features_nonint)
-		# --------- change this--
 
 		enc_label = LabelEncoder()
 
@@ -1650,5 +1651,5 @@ class PredictiveProcessor:
 	#     logger.info("LL: model_deployment start")
 	#     logger.info("LL: model_deployment end")
 	#     logger.info("LL: -------------------------------------")
-	
+
 # %%
